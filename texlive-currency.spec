@@ -1,6 +1,6 @@
 Name:		texlive-currency
 Version:	48990
-Release:	1
+Release:	2
 Summary:	Format currencies in a consistent way
 Group:		Publishing
 URL:		http://www.ctan.org/tex-archive/macros/latex/contrib/currency
