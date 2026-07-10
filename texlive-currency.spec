@@ -1,39 +1,24 @@
-Name:		texlive-currency
-Version:	48990
-Release:	2
+%global tl_name currency
+%global tl_revision 48990
+
+Name:		texlive-%{tl_name}
+Epoch:		1
+Version:	0.4
+Release:	%{tl_revision}.1
 Summary:	Format currencies in a consistent way
 Group:		Publishing
 URL:		https://www.ctan.org/tex-archive/macros/latex/contrib/currency
 License:	lppl1.3
-Source0:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/currency.r%{version}.tar.xz
-Source1:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/currency.doc.r%{version}.tar.xz
-Source2:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/currency.source.r%{version}.tar.xz
+Source0:	https://mirrors.ctan.org/systems/texlive/tlnet/archive/currency.r%{tl_revision}.tar.xz
+Source1:	https://mirrors.ctan.org/systems/texlive/tlnet/archive/currency.doc.r%{tl_revision}.tar.xz
+Source2:	https://mirrors.ctan.org/systems/texlive/tlnet/archive/currency.source.r%{tl_revision}.tar.xz
 BuildArch:	noarch
+BuildSystem:	texlive
 BuildRequires:	texlive-tlpkg
-Requires(pre):	texlive-tlpkg
-Requires(post):	texlive-kpathsea
+%texlive_base_requires
+Provides:	texlive(%{tl_name}) = %{tl_revision}
 
 %description
-The package facilitates the formatting of currencies (amounts
-and units) with various formatting capabilities.
+The package facilitates the formatting of currencies (amounts and units)
+with various formatting capabilities.
 
-%prep
-%setup -c -a1 -a2
-%autopatch -p1
-
-%build
-
-%install
-rm -rf tlpkg
-mkdir -p %{buildroot}%{_texmfdistdir}
-cp -a * %{buildroot}%{_texmfdistdir}
-
-%files
-%doc %{_texmfdistdir}/source/latex/currency
-%{_texmfdistdir}/tex/latex/currency
-%doc %{_texmfdistdir}/doc/latex/currency
-
-%post -p %{_sbindir}/texlive.post
-
-%postun
-[ "$1" -eq 0 ] && %{_sbindir}/texlive.post
